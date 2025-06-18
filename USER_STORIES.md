@@ -6,7 +6,7 @@ This document tracks the user stories and features planned or implemented in the
 
 ## ✅ Phase 1 – Core Features (MVP)
 
-- [ ] **Add Items**
+- [x] **Add Items**
       _As a user, I want to type an item name and optional quantity into an input field so I can add it to my grocery list._
 
 - [ ] **Strike-Through Completed Items**
@@ -15,10 +15,10 @@ This document tracks the user stories and features planned or implemented in the
 - [ ] **Edit Items**
       _As a user, I want to click an edit icon next to a list item so I can change its name or quantity._
 
-- [ ] **Delete Items**
+- [x] **Delete Items**
       _As a user, I want to click a trash icon so I can remove items I no longer need._
 
-- [ ] **Persistent Storage**
+- [x] **Persistent Storage**
       _As a user, I want to see my grocery list saved across sessions so I don’t lose my list when I close the browser._
 
 ---

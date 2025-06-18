@@ -1,34 +1,79 @@
-import { PlusCircle, Volume3, Edit, Trash2, Menu } from "@deemlol/next-icons";
-import { useState } from "react";
+// import { PlusCircle, Volume3, Edit, Trash2, Menu } from "@deemlol/next-icons";
+import GroceryItemCard from "./components/GroceryItemCard";
+import { useGroceryListStore } from "./store/store";
+import InputForm from "./components/InputForm";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "./components/ui/alert-dialog";
+import { Button } from "./components/ui/button";
 
 export default function App() {
-  const date = new Date();
-  const createdDate = date.toLocaleDateString();
-
-  const [isInputOpen, setIsInputOpen] = useState(false);
+  // const date = new Date();
+  // const createdDate = date.toLocaleDateString();
+  const { groceryList, removeItem, completeItem, clearList } =
+    useGroceryListStore();
+  function handleDelete(id: string) {
+    removeItem(id);
+  }
+  function handleConfirmation(id: string) {
+    completeItem(id);
+  }
+  function handleClear() {
+    clearList();
+  }
 
   return (
     <main className="flex min-h-screen items-center justify-center">
-      <div className="w-full max-w-[600px]">
-        <div className="my-2 text-center">
-          <h1 className="text-3xl font-bold">Grocery List</h1>
-          <span className="text-sm">(created on {createdDate})</span>
-        </div>
-        <div className="flex h-40 flex-col items-center justify-center gap-3 rounded-2xl border-2 border-black">
-          hello from Grocery List
-          <div className="flex items-center justify-end gap-3">
-            <p className="text-blue-400 hover:cursor-pointer">reorder</p>
-            <Volume3 size={24} color="black" className="hover:cursor-pointer" />
-            <PlusCircle
-              size={24}
-              color="green"
-              className={`hover:cursor-pointer`}
-              onClick={() => {
-                setIsInputOpen((prev) => !prev);
-              }}
-            />
+      <div className="flex w-full max-w-[600px] flex-col">
+        <h1 className="text-center">Grocery List</h1>
+        <div className="border-2 border-amber-500">
+          <div className="flex flex-col">
+            {groceryList.length > 0 ? (
+              groceryList.map((item) => (
+                <GroceryItemCard
+                  key={item.id}
+                  name={item.name}
+                  amount={item.amount}
+                  unit={item?.unit}
+                  completed={item.completed}
+                  handleConfirmation={() => handleConfirmation(item.id)}
+                  handleDelete={() => handleDelete(item.id)}
+                />
+              ))
+            ) : (
+              <div>Enter an item</div>
+            )}
           </div>
+          <AlertDialog>
+            <AlertDialogTrigger asChild>
+              <Button>Clear</Button>
+            </AlertDialogTrigger>
+            <AlertDialogContent>
+              <AlertDialogHeader>
+                <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+                <AlertDialogDescription>
+                  This action cannot be undone. This will permanently delete
+                  your grocery list.
+                </AlertDialogDescription>
+              </AlertDialogHeader>
+              <AlertDialogFooter>
+                <AlertDialogCancel>Cancel</AlertDialogCancel>
+                <AlertDialogAction onClick={handleClear}>
+                  Confirm
+                </AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
         </div>
+        <InputForm />
       </div>
     </main>
   );
