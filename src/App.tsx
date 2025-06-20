@@ -1,40 +1,19 @@
-// import { PlusCircle, Volume3, Edit, Trash2, Menu } from "@deemlol/next-icons";
-import GroceryItemCard from "./components/GroceryItemCard";
-import { useGroceryListStore } from "./store/store";
-import InputForm from "./components/InputForm";
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "./components/ui/alert-dialog";
-import { Button } from "./components/ui/button";
+import Header from "./components/Header";
+import { Toaster } from "sonner";
 
 export default function App() {
   // const date = new Date();
   // const createdDate = date.toLocaleDateString();
-  const { groceryList, removeItem, completeItem, clearList } =
-    useGroceryListStore();
-  function handleDelete(id: string) {
-    removeItem(id);
-  }
-  function handleConfirmation(id: string) {
-    completeItem(id);
-  }
-  function handleClear() {
-    clearList();
-  }
-
   return (
-    <main className="flex min-h-screen items-center justify-center">
-      <div className="flex w-full max-w-[600px] flex-col">
-        <h1 className="text-center">Grocery List</h1>
-        <div className="border-2 border-amber-500">
+    <div>
+      <Header />
+      <Toaster position="top-center" richColors />
+    </div>
+  );
+}
+
+{
+  /* <div className="border-2 border-amber-500">
           <div className="flex flex-col">
             {groceryList.length > 0 ? (
               groceryList.map((item) => (
@@ -72,9 +51,5 @@ export default function App() {
               </AlertDialogFooter>
             </AlertDialogContent>
           </AlertDialog>
-        </div>
-        <InputForm />
-      </div>
-    </main>
-  );
+        </div> */
 }
