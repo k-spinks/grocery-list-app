@@ -1,35 +1,11 @@
-import GroceryItemCard from "./GroceryItemCard";
-import { useGroceryListStore } from "../store/store";
-import InputForm from "./InputForm";
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "./ui/alert-dialog";
-import { Button } from "./ui/button";
+import GroceryListHeader from "./GroceryListHeader";
+import GroceryListItems from "./GroceryListItems";
 
 export default function GroceryList() {
-  const { groceryList, removeItem, completeItem, clearList } =
-    useGroceryListStore();
-  function handleDelete(id: string) {
-    removeItem(id);
-  }
-  function handleConfirmation(id: string) {
-    completeItem(id);
-  }
-  function handleClear() {
-    clearList();
-  }
-
   return (
-    <main>
-      <div></div>
-    </main>
+    <div className="m-auto flex max-w-[350px] flex-col items-center border-2 border-gray-300/10 md:max-w-[400px] lg:max-w-[600px]">
+      <GroceryListHeader />
+      <GroceryListItems />
+    </div>
   );
 }
